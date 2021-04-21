@@ -43,21 +43,45 @@ class MusicLibraryController
     end
 
     def list_artists
-
+        artists = Artist.all.sort {|x, y| x.name <=> y.name}
+        artists.each.with_index(1) do |artist, index|
+            puts "#{index}. #{artist.name}"
+        end
     end
 
     def list_genres
-
+        genres = Genre.all.sort {|x, y| x.name <=> y.name}
+        genres.each.with_index(1) do |genre, index|
+            puts "#{index}. #{genre.name}"
+        end
     end
 
     
-    def list_songs_by_artist 
+    def list_songs_by_artist
+        puts "Please enter the name of an artist:"
+        input = gets.strip
+        #artist_songs = Artist.songs.sort {|x, y| x.name <=> y.name}
+        artist_songs = Song.all.select do |songs|
+            songs.artist == input
+        end
+        artist_songs1 = artist_songs.sort{|x, y| x.name <=> y.name}
+        binding.pry
+        artist_songs1.each.with_index(1) do |song, index|
+            puts "#{index}. #{song.name}"
+        end
 
+  
     end
 
     def list_songs_by_genre
 
     end
+
+    #def self.find(input)                    
+     #   self.all.detect do |person|
+      #      person.name.downcase == input.downcase
+       # end
+   # end
 
     def play_song
 
